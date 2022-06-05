@@ -35,7 +35,9 @@
       {%- assign enable_image_zoom = false -%}
   {% endcase %}
 
+
   <div class="grid product-single{% if section.settings.enable_payment_button %} product-single--{{ section.settings.media_size }}-media{% endif %}">
+
     <div class="grid__item product-single__media-group {{ product_media_width }}{% if section.settings.media_size == 'full' %} product-single__media-group--full{% endif %}" data-product-single-media-group>
       {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
 
@@ -135,9 +137,11 @@
       <div class="product-single__meta">
 
         <h1 class="product-single__title">{{ product.title }}</h1>
+        <p>⭐⭐⭐⭐⭐</p>
         <script>window.performance.mark('debut:product:title_visible');</script>
 
           <div class="product__price">
+
             {% include 'product-price', variant: current_variant, show_vendor: section.settings.show_vendor %}
           </div>
 
