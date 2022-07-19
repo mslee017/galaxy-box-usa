@@ -290,9 +290,40 @@
         >
         </div>
 
-        <div class="product-single__description rte">
-          {{ product.description }}
+        <div class="rte">
+          <div class="container">
+            <div class="selector">
+              <div class="tab tab-active">
+                {{'customizations.metafield_table.description_tab' | t}}
+              </div>
+            {%- unless product.metafields.description.details == blank -%}
+              <div class="tab">
+                {{'customizations.metafield_table.details_tab' | t}}
+              </div>
+            {% endunless %}
+              <div class="tab">
+                {{'customizations.metafield_table.shipping_tab' | t}}
+              </div>
+            </div>
+            <div class="content">
+              <div id="Description" class="content-body show-active">
+                <h4>{{product.description}}</h4>
+              </div>
+              {%- unless product.metafields.description.details == blank -%}
+                <div id="Details" class="content-body">
+                {{product.metafields.description.details}}
+              </div>
+              {%- endunless -%}
+
+              <div id="Shipping" class="content-body">
+                <p>Your order will be shipped the same, or next, business day. During sale events and holidays, there
+                  may be a slightly longer duration</p>
+              </div>
+            </div>
+          </div>
         </div>
+
+
 
         {% if section.settings.show_share_buttons %}
           {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product.featured_media %}
