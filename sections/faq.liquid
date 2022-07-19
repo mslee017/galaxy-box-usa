@@ -1,0 +1,71 @@
+<h1>{{section.settings.heading}}</h1>
+
+<div class="faq">
+
+    {%- for block in section.blocks -%}
+        {%- if block.type == 'QA' -%}
+        <div class="question">
+            <input type="checkbox" id="question-{{forloop.index}}" class="question-toggle">
+            <label for="question-{{forloop.index}}" class="question-label">{{block.settings.title}}</label>
+            <div class="answer">{{block.settings.answer}}</div>
+        </div>
+
+        {% elsif block.type == 'headline' %}
+            <h4>{{block.settings.headline}}</h4>
+        {% endif %}
+    {% endfor %}
+</div>
+
+
+{% schema %}
+    {
+        "name": "Customer Questions",
+        "settings": [
+            {
+                "type": "text",
+                "label": "Heading for FAQ",
+                "id": "heading"
+            },
+            {
+                "type": "text",
+                "label": "Customer Question",
+                "id": "question"
+            },
+            {
+                "type": "textarea",
+                "label": "Answer for FAQ",
+                "id": "answer"
+            }
+        ],
+        "blocks": [
+            {
+                "type": "QA",
+                "name": "Question/Answer",
+                "settings": [
+                    {
+                        "type": "text",
+                        "label": "Customer Questions",
+                        "id": "title"
+                    },
+                    {
+                        "type": "richtext",
+                        "label": "Answer for FAQ",
+                        "id": "answer"
+                    }
+
+                ]
+            },
+            {
+                "type": "headline",
+                "name": "Headline",
+                "settings": [
+                    {
+                        "type": "text",
+                        "label": "headline",
+                        "id": "headline"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
