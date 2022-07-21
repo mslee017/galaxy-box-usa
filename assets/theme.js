@@ -731,7 +731,9 @@ slate.Variants = (function () {
      */
     _getVariantFromOptions: function () {
       var selectedValues = this._getCurrentOptions();
+      // console.log(selectedValues, 'Selected Values');
       var variants = this.product.variants;
+      // console.log(variants, 'variants');
 
       var found = variants.find(function (variant) {
         return selectedValues.every(function (values) {
@@ -739,6 +741,7 @@ slate.Variants = (function () {
         });
       });
 
+      // console.log(found);
       return found;
     },
 
@@ -762,10 +765,12 @@ slate.Variants = (function () {
         return;
       }
 
+      console.log(variant);
       this._updateMasterSelect(variant);
       this._updateImages(variant);
       this._updatePrice(variant);
       this._updateSKU(variant);
+      this._updateDetails(variant);
       this.currentVariant = variant;
 
       if (this.enableHistoryState) {
@@ -880,6 +885,14 @@ slate.Variants = (function () {
 
       if (!masterSelect) return;
       masterSelect.value = variant.id;
+    },
+
+    _updateDetails: function (variant) {
+      var detailsTab = document.getElementById('Details');
+
+      if (detailsTab && document.variantDetails) {
+        detailsTab.innerHTML = document.variantDetails[variant.id];
+      }
     },
   });
 
@@ -9661,7 +9674,7 @@ function removeImageLoadingAnimation(image) {
   }
 }
 
-// Tab Selectors JS
+// Tab Selectors ************************************
 // function to remove show-active class & add to clicked
 function setActiveContent(el) {
   // select all .content-body
